@@ -1,0 +1,3 @@
+multiply(0,0)
+multiply(123,321)
+add(676,112)
