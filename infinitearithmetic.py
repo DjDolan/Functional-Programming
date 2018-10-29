@@ -1,5 +1,14 @@
 """
 Main Script
+
+Author(s): Donald Aguinaldo | PSID: 1455130 | UNIXID: COSC2954
+
+This program will evaluate lines of code that contain
+multiply() and add() with variables in them and print
+out the correct response on the screen.
+
+Dependencies: Python3
+
 """
 
 import argparse
@@ -12,7 +21,6 @@ parser.add_argument('-dPN', '--digitsPerNode', type=int, help='Number of digits 
 args = parser.parse_args()
 
 def main():
-	
 	input_file = "pycode.txt"
 	num_of_digits = 2
 
