@@ -4,22 +4,17 @@ Reading File Script
 
 import re
 
-def read_file(input_file):
+def read_file(input_file, exp):
 
-	pattern = re.compile('(multiply|add)\(.*,.*\)')
+	file = open(input_file)
 
-	with open(input_file) as file:
-		lines = file.read()
+	pattern = re.compile('(multiply|add)\(.*,.*\)', re.DOTALL)
 
-		matches = pattern.findall(lines)
-
-		for match in matches:
-			if match == "multiply":
-				print("We have a multiplication expression!")
-			elif match == "add":
-				print("We have an addition expression!")
-			else:
-				print("</Error>")
+	for line in file:
+		if pattern.search(line):
+			exp.append(line.rstrip())
+		else:
+			print("line does not contain pattern")
+			exit(1)
 
 	file.close()
-
