@@ -79,16 +79,16 @@ def read_expression(exp, nod, results):
 	#split the expression to left and right
 	left_string = exp[exp.find('(')+1:exp.find(','):]
 	if not left_string:
-		print("error: cannot parse empty string")
-		results.append(0)
+		print("</error> cannot parse empty string <", exp, ">", sep='')
+		results.append(-1)
 		return
 	else:
 		parse_left_operand(left_string[::-1], temporary_string, left_operand, nod, 0)
 
 	right_string = exp[exp.find(',')+1:exp.find(')'):]
 	if not right_string:
-		print("<error> cannot parse empty string <", exp, ">")
-		results.append(0)
+		print("</error> cannot parse empty string <", exp, ">", sep='')
+		results.append(-1)
 		return
 	else:
 		parse_right_operand(right_string[::-1], temporary_string, right_operand, nod, 0)

@@ -33,7 +33,7 @@ def main():
 		read_expression(exp, num_of_digits, results)
 
 	for n in range(len(expressions)):
-		print(expressions[n], '=', results[n])
+		print(expressions[n], '=', results[n], sep='')
 
 if __name__ == "__main__":
 	main()
