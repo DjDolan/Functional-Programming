@@ -61,6 +61,7 @@ def strip_expression(exp):
 		exp = exp.replace('add', '')
 	else:
 		print("unexpected error")
+		exit(1)
 
 	return exp
 
@@ -106,18 +107,28 @@ def read_expression(exp, nod, results):
 	elif exp.find('add') != -1: 
 		op = '+'
 	else:
-		op = '$'
 		print("unexpected error")
+		exit(1)
 
 	#strip expression of impurities
 	exp = strip_expression(exp)
 
 	#split the expression to left and right
 	left_string = exp[exp.find('(')+1:exp.find(','):]
-	parse_left_operand(left_string[::-1], temporary_string, left_operand, nod, 0)
+	if not left_string:
+		print("error: cannot parse empty string")
+		results.append(0)
+		return
+	else:
+		parse_left_operand(left_string[::-1], temporary_string, left_operand, nod, 0)
 
 	right_string = exp[exp.find(',')+1:exp.find(')'):]
-	parse_right_operand(right_string[::-1], temporary_string, right_operand, nod, 0)
+	if not right_string:
+		print("<error> cannot parse empty string <", exp, ">")
+		results.append(0)
+		return
+	else:
+		parse_right_operand(right_string[::-1], temporary_string, right_operand, nod, 0)
 
 	#evaluate the expression
 	evaluate(left_operand, right_operand, nod, op, results)

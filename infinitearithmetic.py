@@ -24,8 +24,8 @@ def main():
 	for exp in expressions:
 		read_expression(exp, num_of_digits, results)
 
-	for i in range(len(expressions)):
-		print(expressions[i], '=', results[i])
+	for n in range(len(expressions)):
+		print(expressions[n], '=', results[n])
 
 if __name__ == "__main__":
 	main()
