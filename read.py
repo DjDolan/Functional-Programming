@@ -1,37 +1,34 @@
 import re
 from evaluate import *
 
-def read(input_text, nod, ans):
+def isInteger(string):
+	try:
+		int(string)
+		return True
+	except ValueError:
+		return False
+
+def read_line(line, nod, i):
 	#pattern of expression that we are looking for to evaluate
 	pattern = re.compile('(multiply|add)\(\d*,\d*\)')
 
-	file = open(input_text)
+	matches = pattern.finditer(line)
 
-	#loop through lines of file and keep looping until there
-	#is only an integer value that has the result
-	for line in file:
-		matches = pattern.finditer(line)
-
-	#go through the matches we found
-	for match in matches:
-		#evaluate until complete
-		line = evaluate(line, match.group(), nod, match)
-
-	#check if there needs to be one more step
-	if line.find('add') != -1:
-		#find new matches
-		matches = pattern.finditer(line)
-
+	if isInteger(line):
+		return line
+	else:
 		for match in matches:
 			line = evaluate(line, match.group(), nod, match)
 
-	elif line.find('multiply') != -1:
-		#find new matches
-		matches = pattern.finditer(line)
+		return read_line(line, nod, i+1)
 
-		for match in matches:
-			line = evaluate(line, match.group(), nod, match)	
+def read_file(input_text, nod, exp, ans):
+	
+	file = open(input_text)
 
-	ans.append(line)
+	for line in file:
+		exp.append(line.strip('\n'))
+		line = read_line(line, nod, 0)
+		ans.append(line.strip('\n'))
 
 	file.close() #closes the file

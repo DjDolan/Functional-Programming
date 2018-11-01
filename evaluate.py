@@ -15,6 +15,7 @@ def make_lists_same_length(op1, op2, i):
 		op2.append(0)
 		make_lists_same_length(op1, op2, i+1)
 
+#right operand
 def parse_right(right_exp, r_op, nod, i, tmp_str):
 	#base case : when reaches end of left string
 	if i == len(right_exp)-1:
@@ -34,6 +35,7 @@ def parse_right(right_exp, r_op, nod, i, tmp_str):
 		tmp_str += right_exp[i]
 		parse_left(right_exp, r_op, nod, i+1, tmp_str)	
 
+#left operand
 def parse_left(left_exp, l_op, nod, i, tmp_str):
 	#base case : when reaches end of left string
 	if i == len(left_exp)-1:
@@ -53,6 +55,7 @@ def parse_left(left_exp, l_op, nod, i, tmp_str):
 		tmp_str += left_exp[i]
 		parse_left(left_exp, l_op, nod, i+1, tmp_str)	
 
+#get operator
 def get_operator(exp):
 	#get operator
 	if exp.find('add') != -1: op = '+'

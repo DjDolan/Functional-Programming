@@ -1,1 +1,2 @@
-add(add(5444,4321),multiply(1,1))
+multiply(add(add(12,31),4321),multiply(1,2))
+add(1,2)

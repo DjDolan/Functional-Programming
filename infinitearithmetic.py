@@ -7,11 +7,14 @@ def main():
 
 	#container for the final answers
 	answers = []
+	expression = []
 
 	#read expression
-	read(txt, num_of_digits, answers)
+	read_file(txt, num_of_digits, expression, answers)
 
-	print(answers)
+	#print out results
+	for n in range(0, len(expression)):
+		print(expression[n], '=', answers[n], sep='')
 
 if __name__ == "__main__":
 	main()

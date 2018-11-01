@@ -48,15 +48,15 @@ def operate(op, left, right, results, nod):
 	#temporary results container for inner results
 	res = []
 
+	#if operator is add then operate add
 	if op == '+':
 		add(left, right, res, nod, 0)
 		results.append(sum(res))
-
+	#if operator is multiply then operate multiply
 	elif op == '*':
 		multiply(left, right, res, nod, 0, 0)
 		results.append(sum(res))
-
+	#else there is no operator
 	else:
 		print("</error> : no operator")
 		exit(1)
-		
