@@ -43,3 +43,19 @@ def multiply(op1, op2, res, nod, i, j):
 		_prod = (op1[i] * i_place_value) * (op2[j] * j_place_value)
 		res.append(_prod)
 		multiply(op1, op2, res, nod, i+1, j)
+
+def operate(op, left, right, results, nod):
+	#temporary results container for inner results
+	res = []
+
+	if op == '+':
+		add(left, right, res, nod, 0)
+		results.append(sum(res))
+
+	elif op == '*':
+		multiply(left, right, res, nod, 0, 0)
+		results.append(sum(res))
+
+	else:
+		print("</error> : no operator")
+		exit(1)
