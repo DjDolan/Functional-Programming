@@ -59,3 +59,4 @@ def operate(op, left, right, results, nod):
 	else:
 		print("</error> : no operator")
 		exit(1)
+		

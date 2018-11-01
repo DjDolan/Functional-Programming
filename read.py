@@ -1,29 +1,37 @@
 import re
 from evaluate import *
 
-def read(input_text, nod):
+def read(input_text, nod, ans):
 	#pattern of expression that we are looking for to evaluate
-	pattern = re.compile('(mulitply|add)\(\d*,\d*\)')
+	pattern = re.compile('(multiply|add)\(\d*,\d*\)')
 
-	#opens the text file containing the lines of instructions
-	with open(input_text) as file:
-		line = file.read() #reads the text file
+	file = open(input_text)
 
-		matches = pattern.finditer(line) #finds the matches in the file
+	#loop through lines of file and keep looping until there
+	#is only an integer value that has the result
+	for line in file:
+		matches = pattern.finditer(line)
 
-		#loops through the matches and evaluates each one
+	#go through the matches we found
+	for match in matches:
+		#evaluate until complete
+		line = evaluate(line, match.group(), nod, match)
+
+	#check if there needs to be one more step
+	if line.find('add') != -1:
+		#find new matches
+		matches = pattern.finditer(line)
+
 		for match in matches:
-			#if they find the exact match then get the position of
-			#the match, the expression, and perform evaluation of it
-			#once finished evaluating then replace the expression with
-			#the result in the original expression
-			if line.find(match.group()) != -1:
-				#position = match.start() #the position
-				expression = match.group() #the expression
-				line = evaluate(line, expression, nod, match) #evaluate function
-				print(line)
-			#else it cannot find the expression
-			else:
-				print("</error> : cannot find match")
+			line = evaluate(line, match.group(), nod, match)
+
+	elif line.find('multiply') != -1:
+		#find new matches
+		matches = pattern.finditer(line)
+
+		for match in matches:
+			line = evaluate(line, match.group(), nod, match)	
+
+	ans.append(line)
 
 	file.close() #closes the file

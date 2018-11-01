@@ -6,6 +6,15 @@ expression.
 
 from operations import *
 
+#this function makes the operands the same length by appending zeroes
+def make_lists_same_length(op1, op2, i):
+	#if they are not the same then keep appending '0'
+	if i == len(op1): 
+		return
+	else:
+		op2.append(0)
+		make_lists_same_length(op1, op2, i+1)
+
 def parse_right(right_exp, r_op, nod, i, tmp_str):
 	#base case : when reaches end of left string
 	if i == len(right_exp)-1:
@@ -96,11 +105,13 @@ def evaluate(orig_exp, exp, nod, match):
 		operand1 = list(map(int, left_operand))
 		operand2 = list(map(int, right_operand))
 
+	#make the lists the same length
+	make_lists_same_length(operand1, operand2, len(operand2))
+
 	#operate on the expressions
 	operate(operator, operand1, operand2, results, nod)
 
 	#change the expression to results in the original expression
-	print(match.group(), str(results[0]))
 	if orig_exp.find(match.group()) != -1:
 		orig_exp = orig_exp.replace(match.group(), str(results[0]))
 
